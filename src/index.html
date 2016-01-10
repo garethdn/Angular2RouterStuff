@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <base href="/">
+    <title>Angular 2 Router Stuff</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://angularjs.org/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="../node_modules/bootswatch/flatly/bootstrap.min.css">
+
+    <script src="../node_modules/lodash/index.js"></script>
+    <script src="../node_modules/moment/min/moment.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/holderjs/holder.min.js"></script>
+
+    <script src="../node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
+
+    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="../node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="../node_modules/angular2/bundles/http.dev.js"></script>
+
+    <script src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+
+    <script src="../dist/data/movies.js"></script>
+
+    <script>
+      System.config({
+        packages: {        
+          'dist': {
+            main: 'boot.js',
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('dist')
+        .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+
+  <body>
+    <app>Loading...</app>
+  </body>
+
+</html>
