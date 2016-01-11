@@ -32,15 +32,17 @@ System.register(['angular2/core', 'angular2/router', '../movies/movies.service',
             }],
         execute: function() {
             ShellComponent = (function () {
-                function ShellComponent(_routeParams, _moviesService, _urlService) {
+                function ShellComponent(_routeParams, _moviesService, _urlService, _router) {
                     this._routeParams = _routeParams;
                     this._moviesService = _moviesService;
                     this._urlService = _urlService;
+                    this._router = _router;
                     this._subscriptions = [];
                 }
                 ShellComponent.prototype.ngOnInit = function () {
+                    console.info('Params', this._routeParams.params);
                     this.subscribeToSelectedMovie();
-                    this._urlService.store(this._routeParams.params);
+                    this._urlService.store(_.clone(this._routeParams.params, this));
                     this.setSelectedMovie(this._urlService.getMoviePropsFromRouteParams(this._routeParams.params, this._moviesService.defaultMovieJSON));
                 };
                 ShellComponent.prototype.subscribeToSelectedMovie = function () {
@@ -58,7 +60,8 @@ System.register(['angular2/core', 'angular2/router', '../movies/movies.service',
                     return true;
                 };
                 ShellComponent.prototype.routerOnReuse = function (next, prev) {
-                    this._urlService.store(next.params);
+                    console.info('Params', next.params);
+                    this._urlService.store(_.clone(next.params, true));
                     this.setSelectedMovie(this._urlService.getMoviePropsFromRouteParams(next.params, this._moviesService.defaultMovieJSON));
                 };
                 ShellComponent.prototype.ngOnDestroy = function () {
@@ -72,7 +75,7 @@ System.register(['angular2/core', 'angular2/router', '../movies/movies.service',
                         template: "\n    <div class=\"container-fluid\">\n      <div class=\"row\">\n        <div class=\"col-sm-4\"><sidebar></sidebar></div>\n        <div class=\"col-sm-8\"><filters></filters></div>\n      </div>\n    </div>\n  ",
                         directives: [sidebar_component_1.SidebarComponent, filters_component_1.FiltersComponent]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, movies_service_1.MoviesService, url_service_1.UrlService])
+                    __metadata('design:paramtypes', [router_1.RouteParams, movies_service_1.MoviesService, url_service_1.UrlService, router_1.Router])
                 ], ShellComponent);
                 return ShellComponent;
             })();

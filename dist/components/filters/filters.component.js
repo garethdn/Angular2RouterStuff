@@ -47,10 +47,17 @@ System.register(['angular2/core', 'angular2/router', '../movies/movies.service',
                     var updatedUrlParams = this._moviesService.defaultMovieJSON[attr] === val ?
                         this._urlService.remove(attr) :
                         this._urlService.add(attr, val);
+                    // this._router.parent.navigate(['Browse', { adult: true }]) 
                     this._router.parent.navigate(['Browse', updatedUrlParams]);
                 };
                 FiltersComponent.prototype.restore = function () {
-                    this._router.parent.navigate(['Browse', this.getOriginalUrlParamsFromMovie(this.selectedMovie)]);
+                    var restoredParams = this.getOriginalUrlParamsFromMovie(this.selectedMovie);
+                    if (!_.isEmpty(restoredParams)) {
+                        this._router.parent.navigate(['Browse', this.getOriginalUrlParamsFromMovie(this.selectedMovie)]);
+                    }
+                    else {
+                        this._router.parent.navigate(['Browse']);
+                    }
                 };
                 FiltersComponent.prototype.getOriginalUrlParamsFromMovie = function (movie) {
                     return this._urlService.getRouteParamsFromMovieProps(movie.original, this._moviesService.defaultMovieJSON);

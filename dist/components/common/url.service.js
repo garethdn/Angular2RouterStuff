@@ -32,7 +32,7 @@ System.register(['angular2/core'], function(exports_1) {
                 UrlService.prototype.add = function (key, val, include) {
                     if (include === void 0) { include = true; }
                     this.params[key] = include ? val : '-' + val;
-                    if (!this.params[key]) {
+                    if (this.params[key] === '') {
                         this.remove(key);
                     }
                     return this.params;

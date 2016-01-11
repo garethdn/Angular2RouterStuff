@@ -75,11 +75,18 @@ export class FiltersComponent {
       this._urlService.remove(attr) :
       this._urlService.add(attr, val);
 
+    // this._router.parent.navigate(['Browse', { adult: true }]) 
     this._router.parent.navigate(['Browse', updatedUrlParams]) 
   }
 
   restore() {
-    this._router.parent.navigate(['Browse', this.getOriginalUrlParamsFromMovie(this.selectedMovie)])
+    var restoredParams = this.getOriginalUrlParamsFromMovie(this.selectedMovie);
+
+    if (!_.isEmpty(restoredParams)) {
+      this._router.parent.navigate(['Browse', this.getOriginalUrlParamsFromMovie(this.selectedMovie)])
+    } else {
+      this._router.parent.navigate(['Browse'])
+    }
   }
 
   getOriginalUrlParamsFromMovie(movie:Movie) {

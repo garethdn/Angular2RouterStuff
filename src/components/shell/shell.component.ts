@@ -26,11 +26,14 @@ export class ShellComponent implements OnInit, OnDestroy {
 
   constructor(private _routeParams:RouteParams,
     private _moviesService: MoviesService,
-    private _urlService: UrlService) { }
+    private _urlService: UrlService,
+    private _router: Router) { }
 
   ngOnInit() {
+    console.info('Params', this._routeParams.params);
+
     this.subscribeToSelectedMovie();
-    this._urlService.store(this._routeParams.params);
+    this._urlService.store(_.clone(this._routeParams.params, this));
     this.setSelectedMovie(this._urlService.getMoviePropsFromRouteParams(this._routeParams.params, this._moviesService.defaultMovieJSON));
   }
 
@@ -51,7 +54,9 @@ export class ShellComponent implements OnInit, OnDestroy {
   }
 
   routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) {
-    this._urlService.store(next.params);
+    console.info('Params', next.params);
+
+    this._urlService.store(_.clone(next.params, true));
     this.setSelectedMovie(this._urlService.getMoviePropsFromRouteParams(next.params, this._moviesService.defaultMovieJSON));
   }
 

@@ -1,10 +1,12 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, RouterOutlet, Route} from 'angular2/router';
+import {RouteConfig, RouterOutlet, Route, Router} from 'angular2/router';
 import {ShellComponent} from '../shell/shell.component';
 
 @Component({
   selector: 'app',
-  template: '<router-outlet></router-outlet>',
+  template: `
+    <router-outlet></router-outlet>
+  `,
   directives: [RouterOutlet]
 })
 
@@ -12,6 +14,4 @@ import {ShellComponent} from '../shell/shell.component';
   new Route({ path: '/', component: ShellComponent, name: 'Browse' })
 ])
 
-export class AppComponent {
-
-}
+export class AppComponent {}

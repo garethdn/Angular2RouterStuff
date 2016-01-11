@@ -28,7 +28,7 @@ System.register(['angular2/core', 'angular2/router', '../shell/shell.component']
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
-                        template: '<router-outlet></router-outlet>',
+                        template: "\n    <router-outlet></router-outlet>\n  ",
                         directives: [router_1.RouterOutlet]
                     }),
                     router_1.RouteConfig([

@@ -60,7 +60,7 @@ export class MoviesService {
 
     if (this._selectedMovie) {
       this._selectedMovie.hasChanged = !_.isEqual(this._selectedMovie.original, this._selectedMovie.getProps())      
-      console.log('Diff', this._selectedMovie.getChanges());
+      // console.log('Diff', this._selectedMovie.getChanges());
     }
 
 

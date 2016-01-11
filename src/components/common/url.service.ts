@@ -24,9 +24,11 @@ export class UrlService {
   add(key, val, include: Boolean = true) {
     this.params[key] = include ? val : '-' + val;
 
-    if (!this.params[key]) { this.remove(key) }
+    if (this.params[key] === '') { 
+      this.remove(key)
+    }
 
-      return this.params;
+    return this.params;
   }
 
   remove(key) {
